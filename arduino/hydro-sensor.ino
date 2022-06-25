@@ -10,10 +10,22 @@ const char* mqtt_pw = MQTT_PW;
 // Time
 #include <NTPClient.h>
 
-// Sensor Specific Libraries (using a dht 11)
-#include <Adafruit_Sensor.h>
-#include <DHT.h>
-
 // MQTT
 #include <PubSubClient.h>
 #include <ArduinoJson.h> //https://github.com/bblanchon/ArduinoJson/wiki/API%20Reference
+
+#define SensorPin A0 
+float sensorValue = 0; 
+void setup() { 
+ Serial.begin(9600); 
+} 
+void loop() { 
+ for (int i = 0; i <= 100; i++) 
+ { 
+   sensorValue = sensorValue + analogRead(SensorPin); 
+   delay(1); 
+ } 
+ sensorValue = sensorValue/100.0; 
+ Serial.println(sensorValue); 
+ delay(5000); 
+} 
